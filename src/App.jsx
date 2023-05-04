@@ -1,16 +1,13 @@
-import Signin from "./components/Signin"
-import Signup from "./components/Signup"
-import Home from "./components/Home"
+import { Outlet } from "react-router-dom"
+
 const style = {
-  conatainer: ``
+  conatainer: `w-screen h-screen flex justify-center items-center bg-slate-50`
 }
 
 function App() {
   return (
-    <div className="bg-slate-100">
-      <Signin />
-      <Signup />
-      <Home />
+    <div className={style.conatainer}>
+      <Outlet />
     </div>
   )
 }
