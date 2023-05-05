@@ -1,4 +1,5 @@
 import React from "react"
+import { useUserAuth } from "../context/UserAuthContext"
 
 const style = {
   section: `bg-white w-72 text-center border flex flex-col `,
@@ -7,13 +8,24 @@ const style = {
 }
 
 const Home = ({ emailId }) => {
-  emailId = "text1234@gmail.com"
+  const { user, logOut } = useUserAuth()
+  // console.log(user)
+  const handleLogOut = async () => {
+    try {
+      await logOut()
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
+
   return (
     <section className={style.section}>
       <div className={style.text}>
-        Hello Welcome, <br /> {emailId}
+        Hello Welcome, <br /> {user.email}
       </div>
-      <button className={style.button}>Logout</button>
+      <button className={style.button} onClick={handleLogOut}>
+        Logout
+      </button>
     </section>
   )
 }

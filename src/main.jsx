@@ -6,6 +6,7 @@ import App from "./App"
 import Signin from "./components/Login"
 import Signup from "./components/Signup"
 import Home from "./components/Home"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 const appConfig = createBrowserRouter([
   {
@@ -22,7 +23,11 @@ const appConfig = createBrowserRouter([
       },
       {
         path: "/home",
-        element: <Home />
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        )
       }
     ]
   }

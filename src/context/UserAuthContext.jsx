@@ -15,6 +15,9 @@ export function UserAuthContextProvider({ children }) {
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password)
   }
+  function logOut() {
+    return signOut(auth)
+  }
   /**
    * Whenever an user is loggedin or created, for this case firebase provide us onchange function "onAuthStateChange"
    * Now, we will be calling the "onAuthStateChange" only once, whenever the component mounts.
@@ -31,7 +34,7 @@ export function UserAuthContextProvider({ children }) {
       unsubscribe()
     }
   }, [])
-  return <userAuthContext.Provider value={{ user: user, signUp: signUp, logIn: logIn }}>{children}</userAuthContext.Provider>
+  return <userAuthContext.Provider value={{ user, signUp, logIn, logOut }}>{children}</userAuthContext.Provider>
 }
 
 /* Using Context */
