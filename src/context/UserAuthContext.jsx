@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { auth } from "../firebase"
 
 /* creating Context */
@@ -18,6 +18,10 @@ export function UserAuthContextProvider({ children }) {
   function logOut() {
     return signOut(auth)
   }
+  function googleSignIn() {
+    const googleAuthProvider = new GoogleAuthProvider()
+    return signInWithPopup(auth, googleAuthProvider)
+  }
   /**
    * Whenever an user is loggedin or created, for this case firebase provide us onchange function "onAuthStateChange"
    * Now, we will be calling the "onAuthStateChange" only once, whenever the component mounts.
@@ -34,7 +38,7 @@ export function UserAuthContextProvider({ children }) {
       unsubscribe()
     }
   }, [])
-  return <userAuthContext.Provider value={{ user, signUp, logIn, logOut }}>{children}</userAuthContext.Provider>
+  return <userAuthContext.Provider value={{ user, signUp, logIn, logOut, googleSignIn }}>{children}</userAuthContext.Provider>
 }
 
 /* Using Context */
