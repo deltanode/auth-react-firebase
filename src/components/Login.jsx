@@ -1,7 +1,8 @@
 // import GoogleButton from "react-google-button"
 import { FcGoogle } from "react-icons/fc"
-
-import { Link } from "react-router-dom"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useUserAuth } from "../context/UserAuthContext"
 
 const style = {
   section: `m-2 p-2 `,
@@ -18,18 +19,34 @@ const style = {
   link: `underline text-blue-800`
 }
 
-const Signin = () => {
+const Login = () => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
+  const { logIn } = useUserAuth()
+  const navigate = useNavigate()
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    setError("")
+    try {
+      await logIn(email, password)
+      navigate("/home")
+    } catch (err) {
+      setError(err.message)
+    }
+  }
   return (
     <section className={style.section}>
       <div className={style.loginBox}>
         <h2 className={style.h2}>Firebase Auth Login</h2>
 
-        <form action="" className={style.form}>
-          <label htmlFor="" hidden className={style.label}>
-            Error
+        <form onSubmit={handleSubmit} className={style.form}>
+          <label hidden={error ? false : true} htmlFor="" className={style.label}>
+            {error}
           </label>
-          <input type="text" placeholder="Email address" className={style.input} />
-          <input type="password" placeholder="Password" className={style.input} />
+          <input type="text" placeholder="Email address" className={style.input} onChange={e => setEmail(e.target.value)} />
+          <input type="password" placeholder="Password" className={style.input} onChange={e => setPassword(e.target.value)} />
           <button className={style.button}>Log In</button>
         </form>
 
@@ -54,7 +71,7 @@ const Signin = () => {
         Don't have an account?{" "}
         <Link to="register" className={style.link}>
           Sign up
-        </Link>
+        </Link>{" "}
         <Link to="home" className={style.link}>
           Home
         </Link>
@@ -63,4 +80,4 @@ const Signin = () => {
   )
 }
 
-export default Signin
+export default Login

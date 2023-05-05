@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 import App from "./App"
-import Signin from "./components/Signin"
+import Signin from "./components/Login"
 import Signup from "./components/Signup"
 import Home from "./components/Home"
 
