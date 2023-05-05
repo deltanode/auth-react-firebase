@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom"
+import { UserAuthContextProvider } from "./context/UserAuthContext"
 
 const style = {
   conatainer: `w-screen h-screen flex justify-center items-center bg-slate-50`
@@ -6,9 +7,11 @@ const style = {
 
 function App() {
   return (
-    <div className={style.conatainer}>
-      <Outlet />
-    </div>
+    <UserAuthContextProvider>
+      <div className={style.conatainer}>
+        <Outlet />
+      </div>
+    </UserAuthContextProvider>
   )
 }
 
