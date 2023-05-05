@@ -1,4 +1,6 @@
+// import GoogleButton from "react-google-button"
 import { FcGoogle } from "react-icons/fc"
+
 import { Link } from "react-router-dom"
 
 const style = {
@@ -32,6 +34,14 @@ const Signin = () => {
         </form>
 
         <hr />
+        {/* <GoogleButton
+          type="dark"
+          // label="Sign In with Google"
+          disabled
+          onClick={() => {
+            console.log("Google button clicked")
+          }}
+        /> */}
         <button className={style.googleButton}>
           <div className={style.googleIcon}>
             <FcGoogle />
